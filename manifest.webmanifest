@@ -1,0 +1,9 @@
+{
+  "name": "DNSA Anos e Modelos",
+  "short_name": "DNSA Motos",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f5f5f3",
+  "theme_color": "#111111",
+  "icons": []
+}

@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111111">
+  <meta name="description" content="Consulta rápida de modelos de motocicletas, anos de aplicação e geração de descrições para anúncios.">
+  <title>DNSA | Anos, Modelos e Descrição Pro</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css?v=9">
+  <link rel="stylesheet" href="descricao-pro.css?v=1">
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell topbar__inner">
+      <a class="brand brand--compact" href="./" aria-label="DNSA - início">
+        <span class="brand__mark">DNSA</span>
+      </a>
+
+      <nav class="top-tabs" aria-label="Ferramentas">
+        <button class="top-tab is-active" type="button" data-page-target="models" aria-pressed="true">Anos &amp; Modelos</button>
+        <button class="top-tab" type="button" data-page-target="description" aria-pressed="false">Descrição Pro</button>
+      </nav>
+
+      <span class="topbar__badge">Consulta rápida</span>
+    </div>
+  </header>
+
+  <div id="pageModels" class="app-page is-active" data-page="models">
+    <main class="shell main">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">BASE DE APLICAÇÃO</p>
+          <h1>Encontre a moto e gere os anos no formato certo.</h1>
+          <p class="hero__copy">Selecione a montadora, a cilindrada e o modelo. Ou pesquise diretamente pelo nome da moto.</p>
+        </div>
+        <div class="hero__stats" aria-label="Resumo da base">
+          <div><strong id="statMakes">0</strong><span>montadoras</span></div>
+        </div>
+      </section>
+
+      <section class="search-card" aria-labelledby="search-title">
+        <div class="section-heading">
+          <div>
+            <span class="step">Busca rápida</span>
+            <h2 id="search-title">Pesquisar moto</h2>
+          </div>
+          <button class="link-button" id="clearAllBtn" type="button">Limpar tudo</button>
+        </div>
+
+        <div class="search-wrap">
+          <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"/></svg>
+          <input id="searchInput" type="search" autocomplete="off" placeholder="Ex.: Titan 160, Bros 160, Factor 150..." aria-label="Pesquisar modelo">
+          <button id="clearSearchBtn" class="search-clear" type="button" aria-label="Limpar pesquisa" hidden>×</button>
+          <div id="suggestions" class="suggestions" hidden></div>
+        </div>
+        <p class="hint">A busca considera nome cadastrado, nome simplificado, montadora e cilindrada.</p>
+      </section>
+
+      <section class="selector-card" aria-labelledby="selector-title">
+        <div class="section-heading">
+          <div>
+            <span class="step">Passo a passo</span>
+            <h2 id="selector-title">Selecionar manualmente</h2>
+          </div>
+          <span id="selectionStatus" class="status-pill">Nenhuma moto selecionada</span>
+        </div>
+
+        <div class="filter-block">
+          <div class="filter-title-row">
+            <h3>1. Montadora</h3>
+            <span id="makeCount" class="muted"></span>
+          </div>
+          <div id="makeChips" class="chips" aria-label="Montadoras"></div>
+        </div>
+
+        <div class="filter-block">
+          <div class="filter-title-row">
+            <h3>2. Cilindrada</h3>
+            <span id="ccHint" class="muted">Selecione uma montadora primeiro</span>
+          </div>
+          <div id="ccChips" class="chips chips--cc" aria-label="Cilindradas"></div>
+        </div>
+
+        <div class="filter-block filter-block--models">
+          <div class="filter-title-row">
+            <h3>3. Modelo</h3>
+            <span id="modelCount" class="muted">Aguardando filtros</span>
+          </div>
+          <div id="modelsGrid" class="models-grid" aria-live="polite">
+            <div class="empty-state">
+              <strong>Escolha uma montadora e uma cilindrada.</strong>
+              <span>Os modelos disponíveis aparecerão aqui.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="resultSection" class="result-card" aria-labelledby="result-title">
+        <div class="result-card__header">
+          <div>
+            <span class="step step--dark">Resultado</span>
+            <h2 id="result-title">Texto para copiar</h2>
+          </div>
+          <div id="resultHeaderActions" class="result-header-actions">
+            <button id="clearSelectedBtn" class="result-clear-btn" type="button" disabled>Limpar motos</button>
+            <span id="resultMeta" class="result-meta">Selecione uma ou mais motos</span>
+          </div>
+        </div>
+
+        <div class="format-row" role="group" aria-label="Formato do texto">
+          <span class="format-label">Formato:</span>
+          <button id="simpleBtn" type="button" class="format-btn is-active" aria-pressed="true">Simplificado</button>
+          <button id="detailedBtn" type="button" class="format-btn" aria-pressed="false">Discriminado</button>
+        </div>
+
+        <div class="output-wrap">
+          <textarea id="outputText" rows="4" readonly placeholder="O texto aparecerá aqui após selecionar a moto."></textarea>
+          <button id="copyBtn" class="copy-btn" type="button" disabled>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h11v11H8zM5 16H3V3h13v2"/></svg>
+            <span>Copiar texto</span>
+          </button>
+        </div>
+
+        <div id="yearsPreview" class="years-preview" hidden>
+          <span id="previewTitle" class="years-preview__label">Anos:</span>
+          <div id="yearBadges" class="year-badges"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="pageDescription" class="app-page" data-page="description" hidden>
+    <main class="shell main">
+      <section class="hero description-hero">
+        <div>
+          <p class="eyebrow">DESCRIÇÃO COM IA</p>
+          <h1>Transforme dados secos em uma descrição pronta para vender.</h1>
+          <p class="hero__copy">Cole o título e os produtos do kit. A IA cruza os modelos com a base de anos do site e monta uma descrição clara para Mercado Livre e Shopee.</p>
+        </div>
+        <div class="hero__stats" aria-label="Recurso">
+          <div><strong>IA</strong><span>Descrição Pro</span></div>
+        </div>
+      </section>
+
+      <section class="description-card" aria-labelledby="description-title">
+        <div class="section-heading">
+          <div>
+            <span class="step">Entrada</span>
+            <h2 id="description-title">Dados do anúncio</h2>
+          </div>
+          <button id="clearDescriptionBtn" class="link-button" type="button">Limpar</button>
+        </div>
+
+        <div class="description-form">
+          <label class="field">
+            <span class="field__label">Título</span>
+            <input id="adTitleInput" type="text" autocomplete="off" placeholder="Ex.: Par Coxim Apoio Tanque Dianteiro Bros 125, Bros 150, Falcon">
+          </label>
+
+          <label class="field">
+            <span class="field__label">Produtos do kit</span>
+            <textarea id="kitProductsInput" rows="8" placeholder="Cole os produtos exatamente como estão cadastrados, todos no mesmo bloco."></textarea>
+          </label>
+
+          <p class="description-hint">A IA usa a base local de motos e anos como referência de aplicação. Ela não deve inventar anos fora da base.</p>
+
+          <button id="generateDescriptionBtn" class="ai-generate-btn" type="button">
+            <span class="ai-generate-btn__icon">✦</span>
+            <span>Gerar descrição</span>
+          </button>
+
+          <div id="descriptionStatus" class="description-status" role="status" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section id="descriptionResultCard" class="description-result-card" aria-labelledby="description-result-title">
+        <div class="description-result-card__header">
+          <div>
+            <span class="step step--dark">Resultado</span>
+            <h2 id="description-result-title">Descrição pronta</h2>
+          </div>
+          <span id="applicationMatchMeta" class="result-meta">Aguardando geração</span>
+        </div>
+
+        <div class="output-wrap description-output-wrap">
+          <textarea id="descriptionOutput" rows="18" readonly placeholder="A descrição gerada aparecerá aqui."></textarea>
+          <button id="copyDescriptionBtn" class="copy-btn" type="button" disabled>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h11v11H8zM5 16H3V3h13v2"/></svg>
+            <span>Copiar descrição</span>
+          </button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite">Texto copiado!</div>
+
+  <footer class="footer">
+    <div class="shell footer__inner">
+      <div>
+        <strong>DNSA Moto Peças</strong>
+        <span>Base de consulta de anos, modelos e descrições.</span>
+      </div>
+      <span>Base atualizada em 11/09/2026</span>
+    </div>
+  </footer>
+
+  <script src="data.js?v=9"></script>
+  <script src="app.js?v=9"></script>
+  <script>
+  window.DNSA_AI_ENDPOINT = "https://dnsa-descricao-pro.ecommercednsa.workers.dev";
+  </script>
+  <script src="descricao-pro.js?v=2"></script>
+</body>
+</html>

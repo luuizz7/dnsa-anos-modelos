@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/descricao.js": {
+      "maxDuration": 30
+    }
+  }
+}

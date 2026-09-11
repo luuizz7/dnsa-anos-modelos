@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 110" role="img" aria-label="Dafra Motos">
+  <g transform="translate(95 40)">
+    <circle r="29" fill="none" stroke="#f2b800" stroke-width="5"/>
+    <g fill="none" stroke="#f2b800" stroke-width="7" stroke-linecap="round">
+      <path d="M-51-12c24-10 50-15 88-15"/>
+      <path d="M-56 1c30-10 60-13 101-11"/>
+      <path d="M-50 15c30-8 60-9 94-5"/>
+    </g>
+  </g>
+  <text x="95" y="102" text-anchor="middle" fill="#666" font-family="Arial Black,Arial,sans-serif" font-size="26" font-weight="900">DAFRA</text>
+</svg>

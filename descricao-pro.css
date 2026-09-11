@@ -1,0 +1,178 @@
+
+/* Descrição Pro + navegação.
+   O styles.css original permanece separado e sem alterações de layout. */
+
+.brand--compact { flex: 0 0 auto; }
+
+.top-tabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: auto;
+}
+
+.top-tab {
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: #bdbdbd;
+  font-weight: 850;
+  transition: .16s ease;
+}
+
+.top-tab:hover { color: #fff; background: #252525; }
+
+.top-tab.is-active {
+  background: var(--yellow);
+  color: #111;
+  border-color: var(--yellow);
+}
+
+.app-page[hidden] { display: none !important; }
+.description-hero h1 { max-width: 880px; }
+
+.description-card,
+.description-result-card {
+  margin-top: 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.description-card { padding: 24px; }
+
+.description-form {
+  display: grid;
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.field { display: grid; gap: 8px; }
+
+.field__label {
+  font-size: 13px;
+  font-weight: 900;
+  color: #343434;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  border: 2px solid #d8d8d8;
+  border-radius: 14px;
+  outline: none;
+  background: #fff;
+  color: #111;
+  transition: .18s ease;
+}
+
+.field input { height: 56px; padding: 0 16px; }
+
+.field textarea {
+  min-height: 190px;
+  resize: vertical;
+  padding: 16px;
+  line-height: 1.55;
+}
+
+.field input:focus,
+.field textarea:focus {
+  border-color: #111;
+  box-shadow: 0 0 0 4px rgba(255,255,0,.45);
+}
+
+.description-hint {
+  margin: -3px 0 0;
+  color: #777;
+  font-size: 13px;
+}
+
+.ai-generate-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: fit-content;
+  min-height: 48px;
+  padding: 0 19px;
+  border: 0;
+  border-radius: 12px;
+  background: #111;
+  color: var(--yellow);
+  font-weight: 900;
+  transition: .16s ease;
+}
+
+.ai-generate-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(0,0,0,.12);
+}
+
+.ai-generate-btn:disabled {
+  cursor: wait;
+  opacity: .58;
+}
+
+.ai-generate-btn__icon { font-size: 19px; }
+
+.description-status {
+  min-height: 20px;
+  color: #666;
+  font-size: 13px;
+}
+
+.description-status.is-error {
+  color: #a00000;
+  font-weight: 700;
+}
+
+.description-result-card {
+  overflow: hidden;
+  background: #111;
+  border-color: #111;
+  color: #fff;
+}
+
+.description-result-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 24px 24px 0;
+}
+
+.description-result-card h2 {
+  margin: 0;
+  font-size: 24px;
+  letter-spacing: -.025em;
+}
+
+.description-output-wrap { padding-top: 20px; }
+
+.description-output-wrap textarea {
+  min-height: 420px;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 760px) {
+  .topbar__inner {
+    flex-wrap: wrap;
+    padding: 10px 0;
+  }
+
+  .top-tabs {
+    order: 3;
+    width: 100%;
+  }
+
+  .top-tab { flex: 1; }
+
+  .description-result-card__header {
+    flex-direction: column;
+  }
+
+  .ai-generate-btn { width: 100%; }
+}
