@@ -1,12 +1,14 @@
 window.MOTOS = [
-  {
-    "montadora": "HONDA",
-    "cilindrada": 100,
-    "modelo": "BIZ 100",
-    "de": 1998,
-    "ate": 2015,
-    "nome": "BIZ 100"
-  },
+{
+  "montadora": "HONDA",
+  "cilindrada": 100,
+  "modelo": "BIZ 100",
+  "faixas": [
+    [1998, 2005],
+    [2013, 2015]
+  ],
+  "nome": "BIZ 100"
+},
   {
     "montadora": "HONDA",
     "cilindrada": 100,
@@ -59,9 +61,10 @@ window.MOTOS = [
     "montadora": "HONDA",
     "cilindrada": 125,
     "modelo": "NXR 125 BROS",
-    "de": 2003,
-    "ate": 2015,
-    "nome": "Bros 125"
+    "faixas": [
+    [2003, 2005],
+    [2013, 2015]
+  ],
   },
   {
     "montadora": "HONDA",

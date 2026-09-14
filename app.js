@@ -51,10 +51,37 @@
     format: "simple",
   };
 
+  function normalizedRanges(item) {
+    if (Array.isArray(item.faixas) && item.faixas.length) {
+      return item.faixas
+        .map(range => Array.isArray(range) ? [Number(range[0]), Number(range[1] ?? range[0])] : null)
+        .filter(range => range && Number.isFinite(range[0]) && Number.isFinite(range[1]))
+        .map(([a, b]) => [Math.min(a, b), Math.max(a, b)]);
+    }
+
+    const start = Number(item.de);
+    const end = Number(item.ate ?? item.de);
+    if (!Number.isFinite(start) || !Number.isFinite(end)) return [];
+
+    return [[Math.min(start, end), Math.max(start, end)]];
+  }
+
+  function firstYear(item) {
+    return normalizedRanges(item)[0]?.[0] ?? Number.POSITIVE_INFINITY;
+  }
+
+  function itemKey(item) {
+    const ranges = normalizedRanges(item)
+      .map(([start, end]) => `${start}-${end}`)
+      .join(",");
+
+    return [item.montadora, item.cilindrada, item.modelo, ranges].join("|");
+  }
+
   const normalized = data.map((item, index) => ({
     ...item,
     index,
-    key: [item.montadora, item.cilindrada, item.modelo, item.de, item.ate].join("|"),
+    key: itemKey(item),
     search: normalize([
       item.montadora,
       item.cilindrada,
@@ -84,30 +111,41 @@
   }
 
   function yearsFor(item) {
-    const start = Number(item.de);
-    const fallbackEnd = item.ate ?? item.de;
-    const end = Number(fallbackEnd);
-    if (!Number.isFinite(start) || !Number.isFinite(end)) return [];
-    const lo = Math.min(start, end);
-    const hi = Math.max(start, end);
-    return Array.from({ length: hi - lo + 1 }, (_, i) => lo + i);
+    const years = [];
+
+    normalizedRanges(item).forEach(([start, end]) => {
+      for (let year = start; year <= end; year += 1) {
+        years.push(year);
+      }
+    });
+
+    return [...new Set(years)].sort((a, b) => a - b);
   }
 
   function rangeLabel(item) {
-    const start = Number(item.de);
-    const end = Number(item.ate ?? item.de);
-    if (!Number.isFinite(start) || !Number.isFinite(end)) return "";
-    return start === end ? String(start) : `${start} a ${end}`;
+    const ranges = normalizedRanges(item);
+    if (!ranges.length) return "";
+
+    return ranges
+      .map(([start, end]) => start === end ? String(start) : `${start} a ${end}`)
+      .join(" / ");
   }
 
   function formatOutput(item) {
     const name = displayName(item);
     const years = yearsFor(item);
     if (!years.length) return name;
-    if (state.format === "detailed") return `${name} ${years.join(" ")}`;
-    return years.length === 1
-      ? `${name} ${years[0]}`
-      : `${name} ${years[0]} a ${years[years.length - 1]}`;
+
+    if (state.format === "detailed") {
+      return `${name} ${years.join(" ")}`;
+    }
+
+    const ranges = normalizedRanges(item);
+    const compact = ranges
+      .map(([start, end]) => start === end ? String(start) : `${start} a ${end}`)
+      .join(" / ");
+
+    return `${name} ${compact}`;
   }
 
   function findItemByKey(key) {
@@ -207,7 +245,7 @@
     if (!state.montadora || !state.cilindrada) return [];
     return normalized
       .filter(x => x.montadora === state.montadora && Number(x.cilindrada) === Number(state.cilindrada))
-      .sort((a, b) => displayName(a).localeCompare(displayName(b), "pt-BR") || a.de - b.de);
+      .sort((a, b) => displayName(a).localeCompare(displayName(b), "pt-BR") || firstYear(a) - firstYear(b));
   }
 
   function renderModels() {
