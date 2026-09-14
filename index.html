@@ -4,12 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#111111">
-  <meta name="description" content="Consulta rápida de modelos de motocicletas, anos de aplicação e geração de descrições para anúncios.">
-  <title>DNSA | Anos, Modelos e Descrição Pro</title>
+  <meta name="description" content="Consulta rápida de modelos de motocicletas e anos de aplicação.">
+  <title>DNSA | Anos e Modelos</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="styles.css?v=9">
-  <link rel="stylesheet" href="descricao-pro.css?v=1">
+  <link rel="stylesheet" href="styles.css?v=10">
 </head>
 <body>
   <header class="topbar">
@@ -17,11 +16,6 @@
       <a class="brand brand--compact" href="./" aria-label="DNSA - início">
         <span class="brand__mark">DNSA</span>
       </a>
-
-      <nav class="top-tabs" aria-label="Ferramentas">
-        <button class="top-tab is-active" type="button" data-page-target="models" aria-pressed="true">Anos &amp; Modelos</button>
-        <button class="top-tab" type="button" data-page-target="description" aria-pressed="false">Descrição Pro</button>
-      </nav>
 
       <span class="topbar__badge">Consulta rápida</span>
     </div>
@@ -131,77 +125,13 @@
     </main>
   </div>
 
-  <div id="pageDescription" class="app-page" data-page="description" hidden>
-    <main class="shell main">
-      <section class="hero description-hero">
-        <div>
-          <p class="eyebrow">DESCRIÇÃO COM IA</p>
-          <h1>Transforme dados secos em uma descrição pronta para vender.</h1>
-          <p class="hero__copy">Cole o título e os produtos do kit. A IA cruza os modelos com a base de anos do site e monta uma descrição clara para Mercado Livre e Shopee.</p>
-        </div>
-        <div class="hero__stats" aria-label="Recurso">
-          <div><strong>IA</strong><span>Descrição Pro</span></div>
-        </div>
-      </section>
-
-      <section class="description-card" aria-labelledby="description-title">
-        <div class="section-heading">
-          <div>
-            <span class="step">Entrada</span>
-            <h2 id="description-title">Dados do anúncio</h2>
-          </div>
-          <button id="clearDescriptionBtn" class="link-button" type="button">Limpar</button>
-        </div>
-
-        <div class="description-form">
-          <label class="field">
-            <span class="field__label">Título</span>
-            <input id="adTitleInput" type="text" autocomplete="off" placeholder="Ex.: Par Coxim Apoio Tanque Dianteiro Bros 125, Bros 150, Falcon">
-          </label>
-
-          <label class="field">
-            <span class="field__label">Produtos do kit</span>
-            <textarea id="kitProductsInput" rows="8" placeholder="Cole os produtos exatamente como estão cadastrados, todos no mesmo bloco."></textarea>
-          </label>
-
-          <p class="description-hint">A IA usa a base local de motos e anos como referência de aplicação. Ela não deve inventar anos fora da base.</p>
-
-          <button id="generateDescriptionBtn" class="ai-generate-btn" type="button">
-            <span class="ai-generate-btn__icon">✦</span>
-            <span>Gerar descrição</span>
-          </button>
-
-          <div id="descriptionStatus" class="description-status" role="status" aria-live="polite"></div>
-        </div>
-      </section>
-
-      <section id="descriptionResultCard" class="description-result-card" aria-labelledby="description-result-title">
-        <div class="description-result-card__header">
-          <div>
-            <span class="step step--dark">Resultado</span>
-            <h2 id="description-result-title">Descrição pronta</h2>
-          </div>
-          <span id="applicationMatchMeta" class="result-meta">Aguardando geração</span>
-        </div>
-
-        <div class="output-wrap description-output-wrap">
-          <textarea id="descriptionOutput" rows="18" readonly placeholder="A descrição gerada aparecerá aqui."></textarea>
-          <button id="copyDescriptionBtn" class="copy-btn" type="button" disabled>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h11v11H8zM5 16H3V3h13v2"/></svg>
-            <span>Copiar descrição</span>
-          </button>
-        </div>
-      </section>
-    </main>
-  </div>
-
   <div id="toast" class="toast" role="status" aria-live="polite">Texto copiado!</div>
 
   <footer class="footer">
     <div class="shell footer__inner">
       <div>
         <strong>DNSA Moto Peças</strong>
-        <span>Base de consulta de anos, modelos e descrições.</span>
+        <span>Base de consulta de anos e modelos.</span>
       </div>
       <span>Base atualizada em 11/09/2026</span>
     </div>
@@ -209,9 +139,5 @@
 
   <script src="data.js?v=9"></script>
   <script src="app.js?v=9"></script>
-  <script>
-  window.DNSA_AI_ENDPOINT = "https://dnsa-descricao-pro.ecommercednsa.workers.dev";
-  </script>
-  <script src="descricao-pro.js?v=2"></script>
 </body>
 </html>

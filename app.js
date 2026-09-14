@@ -252,7 +252,7 @@
   }
 
   function renderResult() {
-    const items = selectedItems();
+    const items = selectedItems().slice().sort((a, b) => Number(a.cilindrada) - Number(b.cilindrada));
     const lastItem = activeItem();
 
     els.simpleBtn.classList.toggle("is-active", state.format === "simple");
