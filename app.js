@@ -31,7 +31,7 @@
   };
 
 
-  const MAKE_ORDER = ["HONDA", "YAMAHA", "SUZUKI", "SHINERAY", "DAFRA", "HAOJUE", "TRAXX"];
+  const MAKE_ORDER = ["HONDA", "YAMAHA", "SUZUKI", "SHINERAY", "DAFRA", "HAOJUE", "TRAXX","KASINSKI"];
 
   const MAKE_LOGOS = {
     HONDA: "assets/logos/honda.png",
@@ -41,6 +41,7 @@
     DAFRA: "assets/logos/dafra.png",
     HAOJUE: "assets/logos/haojue.png",
     TRAXX: "assets/logos/traxx.png",
+    KASINSKI: "assets/logos/kasinski.png"
   };
 
   const state = {

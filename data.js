@@ -1921,5 +1921,69 @@ window.MOTOS = [
     "de": 2004,
     "ate": 2016,
     "nome": "STAR 50"
+  },
+  {
+    "montadora": "KASINSKI",
+    "cilindrada": 250,
+    "modelo": "MIRAGE 250",
+    "de": 2001,
+    "ate": 2013,
+    "nome": "MIRAGE 250"
+  },
+  {
+    "montadora": "KASINSKI",
+    "cilindrada": 250,
+    "modelo": "COMET 250 GT / GTR",
+    "de": 2005,
+    "ate": 2013,
+    "nome": "COMET 250"
+  },
+  {
+    "montadora": "KASINSKI",
+    "cilindrada": 650,
+    "modelo": "COMET 650 GT / GTR",
+    "de": 2005,
+    "ate": 2013,
+    "nome": "COMET 650"
+  },
+  {
+    "montadora": "KASINSKI",
+    "cilindrada": 50,
+    "modelo": "SOFT 50",
+    "de": 2011,
+    "ate": 2013,
+    "nome": "SOFT 50"
+  },
+  {
+    "montadora": "KASINSKI",
+    "cilindrada": 110,
+    "modelo": "WIN 110",
+    "de": 2006,
+    "ate": 2013,
+    "nome": "WIN 110"
+  },
+  {
+    "montadora": "KASINSKI",
+    "cilindrada": 150,
+    "modelo": "PRIMA 150",
+    "de": 2011,
+    "ate": 2013,
+    "nome": "PRIMA 150"
+  },
+  {
+    "montadora": "KASINSKI",
+    "cilindrada": 125,
+    "modelo": "SETA 125",
+    "de": 2006,
+    "ate": 2009,
+    "nome": "SETA 125"
+  },
+  {
+    "montadora": "KASINSKI",
+    "cilindrada": 150,
+    "modelo": "CRZ 150",
+    "de": 2010,
+    "ate": 2013,
+    "nome": "CRZ 150"
   }
 ];
